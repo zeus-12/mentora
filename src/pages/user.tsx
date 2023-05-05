@@ -1,10 +1,9 @@
 import { Badge, Button } from "@mantine/core";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import useSWR from "swr";
-import BuddyCard from "../components/Buddy/BuddyCard";
-import { getFetcher } from "../lib/SWR";
+import BuddyCard from "@/components/Buddy/BuddyCard";
+import { getFetcher } from "@/lib/SWR";
 
 const User = () => {
   const { data: session } = useSession();
@@ -49,7 +48,7 @@ const User = () => {
           You may contact them through their smail
         </p>
         <div className="grid auto-rows-max justify-items-stretch grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-3">
-          {buddyData?.map((buddy) => (
+          {buddyData?.map((buddy: any) => (
             <div
               key={buddy._id}
               className="bg-gray-900 p-4 hover:scale-[102%] transition transform duration-100 ease-out  flex flex-col gap-1 justify-between space-y-1 rounded-lg"
@@ -61,7 +60,7 @@ const User = () => {
                   {buddy.applied_users?.length || 0}
                 </Badge>
               </div>
-              {buddy.applied_users?.map((applied) => (
+              {buddy.applied_users?.map((applied: string) => (
                 <div key={applied} className="flex flex-col gap-1">
                   <p className="text-gray-400 text-sm">{applied}</p>
                 </div>

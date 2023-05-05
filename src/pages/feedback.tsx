@@ -2,13 +2,12 @@ import { Button, Select, Switch, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { buttonOutlineClasses } from "../lib/constants";
-import { postRequestConfig } from "../utils/helper";
+import { postRequestConfig } from "@/utils/helper";
 import {
   errorNotification,
   notSignedInNotification,
   successNotification,
-} from "../utils/notification";
+} from "@/utils/notification";
 
 const Feedback = () => {
   const { data: session } = useSession();
@@ -93,7 +92,7 @@ const Feedback = () => {
       <Button
         loading={loading}
         onClick={submitFeedbackHandler}
-        className={buttonOutlineClasses}
+        className="btn-outline"
       >
         Submit
       </Button>

@@ -3,11 +3,8 @@ import { useForm } from "@mantine/form";
 import { IconX } from "@tabler/icons";
 import { useState } from "react";
 import { useSWRConfig } from "swr";
-import { postRequestConfig } from "../../utils/helper";
-import {
-  errorNotification,
-  successNotification,
-} from "../../utils/notification";
+import { postRequestConfig } from "@/utils/helper";
+import { errorNotification, successNotification } from "@/utils/notification";
 
 interface NewBuddyModalProps {
   newBuddyModal: boolean;

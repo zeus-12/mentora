@@ -2,23 +2,23 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
-  const features = [
-    {
-      title: "Resources",
-      body: "Share previous year QP's, Reference Books, Class Notes.",
-      href: "/course",
-    },
-    { title: "Q&A", body: "Ask and solve Doubts.", href: "/doubt" },
-    {
-      title: "Buddy",
-      body: "Learn together, or get a senior to tutor you.",
-      href: "/buddy",
-    },
-  ];
+const features = [
+  {
+    title: "Resources",
+    body: "Share previous year QP's, Reference Books, Class Notes.",
+    href: "/course",
+  },
+  { title: "Q&A", body: "Ask and solve Doubts.", href: "/doubt" },
+  {
+    title: "Buddy",
+    body: "Learn together, or get a senior to tutor you.",
+    href: "/buddy",
+  },
+];
 
+export default function Home() {
   return (
-    <div className="md:p-4 p-2 flex-1 lg:p-6 xl:p-8">
+    <main className="md:p-4 p-2 flex-1 lg:p-6 xl:p-8">
       <Head>
         <title>Mentora</title>
         <meta name="description" content="All-In-One App for Acads!" />
@@ -28,7 +28,7 @@ export default function Home() {
         <p className="text-4xl font-bold md:text-5xl text-gray-100 tracking-tight lg:text-6xl block">
           👋 Hey Junta,
         </p>
-        <p className="xl:ml-10 md:text-3xl tracking-tighter md:max-w-[40rem] text-2xl font-semibold text-gray-400 mt-4 font-mono">
+        <p className="xl:ml-16 md:text-3xl tracking-tighter md:max-w-[40rem] text-2xl font-semibold text-gray-400 mt-4 font-mono">
           This is{" "}
           <span className="text-green-400 hover:underline underline-offset-4">
             Mentora
@@ -62,6 +62,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

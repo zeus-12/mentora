@@ -1,6 +1,4 @@
 export const GREEN_400 = "#22c55e";
-export const buttonOutlineClasses =
-  "text-green-500 border-green-500 hover:bg-green-500 hover:text-white";
 
 export const availableBranches = [
   "all",

@@ -1,8 +1,10 @@
-import { unstable_getServerSession } from "next-auth";
-import { authOptions } from "../pages/api/auth/[...nextauth]";
+import { getServerSession as getDefaultServerSession } from "next-auth/next";
 
-const getServerSession = async (req, res) => {
-  const session = await unstable_getServerSession(req, res, authOptions);
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { NextApiRequest, NextApiResponse } from "next";
+
+const getServerSession = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getDefaultServerSession(req, res, authOptions);
   return session;
 };
 

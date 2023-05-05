@@ -1,32 +1,31 @@
 import { Pagination, TextInput } from "@mantine/core";
 import { useState } from "react";
-import CourseCard from "../../components/Course/CourseCard";
-import LoaderComponent from "../../components/UI/LoaderComponent";
+import CourseCard from "@/components/Course/CourseCard";
+import LoaderComponent from "@/components/UI/LoaderComponent";
 import { IconNotebook } from "@tabler/icons-react";
-import { filterOnSearch } from "../../utils/helper";
-import MenuComponent from "../../components/UI/MenuComponent";
-import { availableBranches } from "../../lib/constants";
-const name_id_map = require("../../../name-id-map.json");
+import { filterOnSearch } from "@/utils/helper";
+import MenuComponent from "@/components/UI/MenuComponent";
+import { availableBranches } from "@/lib/constants";
+import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
 
 export default function Home() {
   const [branchFilter, setBranchFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // @ts-ignore
-  const generateCoursesData = (name_id_map) => {
-    // @ts-ignore
-    const coursesData = [];
-    Object.keys(name_id_map).map((item) => {
+  const generateCoursesData = (courses: { [key: string]: string }) => {
+    const coursesData: { course_name: string; course_id: string }[] = [];
+
+    Object.keys(courses).map((item) => {
       coursesData.push({
-        course_name: name_id_map[item],
+        course_name: courses[item],
         course_id: item,
       });
     });
-    // @ts-ignore
+
     return coursesData;
   };
 
-  const courses = generateCoursesData(name_id_map);
+  const courses = generateCoursesData(CourseMapping);
 
   const branchFilteredCourses = () => {
     if (branchFilter === "all") {

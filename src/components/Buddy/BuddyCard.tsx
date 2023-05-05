@@ -1,8 +1,8 @@
-import { getCourseNameFromId, prettifyId } from "../../utils/helper";
+import { getCourseNameFromId, prettifyId } from "@/utils/helper";
 import { IconCurrencyRupee } from "@tabler/icons";
 
 interface BuddyCardProps {
-  onClick: () => void;
+  onClick?: () => void;
   buddy: any;
 }
 

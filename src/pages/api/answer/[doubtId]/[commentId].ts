@@ -1,7 +1,7 @@
 // main comment
-import Answer from "../../../../models/answer";
-import dbConnect from "../../../../lib/dbConnect";
-import getServerSession from "../../../../utils/getServerSession";
+import Answer from "@/models/answer";
+import dbConnect from "@/lib/dbConnect";
+import getServerSession from "@/utils/getServerSession";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

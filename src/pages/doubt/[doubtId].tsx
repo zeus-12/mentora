@@ -2,20 +2,18 @@ import { Button, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import CommentCard from "../../components/Common/CommentCard";
-import LoaderComponent from "../../components/UI/LoaderComponent";
-import SubCommentCard from "../../components/Common/SubCommentCard";
-import { buttonOutlineClasses } from "../../lib/constants";
-import { postRequestConfig, prettifyId } from "../../utils/helper";
+import CommentCard from "@/components/Common/CommentCard";
+import LoaderComponent from "@/components/UI/LoaderComponent";
+import SubCommentCard from "@/components/Common/SubCommentCard";
+import { postRequestConfig, prettifyId } from "@/utils/helper";
 import {
   errorNotification,
   notSignedInNotification,
   successNotification,
-} from "../../utils/notification";
+} from "@/utils/notification";
 import useSWR from "swr";
-import { getFetcher } from "../../lib/SWR";
-
-const idNameMapping = require("../../../name-id-map.json");
+import { getFetcher } from "@/lib/SWR";
+import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
 
 const DoubtDetailsPage = () => {
   const router = useRouter();
@@ -97,7 +95,11 @@ const DoubtDetailsPage = () => {
           <p className="text-3xl mb-2 font-bold">
             {prettifyId(doubt.course_id)}:{" "}
             <span className="text-gray-500">
-              {idNameMapping[doubt.course_id?.toUpperCase()]}
+              {
+                CourseMapping[
+                  doubt.course_id?.toUpperCase() as keyof typeof CourseMapping
+                ]
+              }
             </span>
           </p>
           <p className="text-2xl font-semibold">{doubt.title}</p>
@@ -105,7 +107,7 @@ const DoubtDetailsPage = () => {
         </div>
 
         {user === doubt.user && doubt.status === "PENDING" && (
-          <Button onClick={resolveDoubt} className={buttonOutlineClasses}>
+          <Button onClick={resolveDoubt} className="btn-outline">
             Mark as Resolved
           </Button>
         )}
@@ -122,7 +124,7 @@ const DoubtDetailsPage = () => {
           className="my-2"
           {...form.getInputProps("answer")}
         />
-        <Button onClick={addAnswer} className={buttonOutlineClasses}>
+        <Button onClick={addAnswer} className="btn-outline">
           Add Answer
         </Button>
 

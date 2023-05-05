@@ -2,9 +2,8 @@ import { Button, FileInput, Textarea, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { buttonOutlineClasses } from "../../lib/constants";
-import { postRequestConfig } from "../../utils/helper";
-import { errorNotification } from "../../utils/notification";
+import { postRequestConfig } from "@/utils/helper";
+import { errorNotification } from "@/utils/notification";
 
 const NewDoubt = () => {
   const [loading, setLoading] = useState(false);
@@ -81,7 +80,7 @@ const NewDoubt = () => {
         <Button
           loading={loading}
           onClick={registerHandler}
-          className={buttonOutlineClasses + " mt-4"}
+          className="btn-outline mt-4"
         >
           Post your question
         </Button>

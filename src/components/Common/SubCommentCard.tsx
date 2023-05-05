@@ -1,10 +1,10 @@
 import { Avatar } from "@mantine/core";
 import { IconHeart } from "@tabler/icons";
-import { generateAvatarText } from "../../utils/helper";
+import { generateAvatarText } from "@/utils/helper";
 import {
   errorNotification,
   notSignedInNotification,
-} from "../../utils/notification";
+} from "@/utils/notification";
 
 interface SubCommentCardProps {
   like_count: number;

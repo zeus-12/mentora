@@ -2,14 +2,14 @@ import { Button, TextInput } from "@mantine/core";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
-import { availableBranches, buttonOutlineClasses } from "../../lib/constants";
-import DoubtCard from "../../components/Doubt/DoubtCard";
-import LoaderComponent from "../../components/UI/LoaderComponent";
-import { notSignedInNotification } from "../../utils/notification";
-import { filterOnSearch } from "../../utils/helper";
-import MenuComponent from "../../components/UI/MenuComponent";
+import { availableBranches } from "@/lib/constants";
+import DoubtCard from "@/components/Doubt/DoubtCard";
+import LoaderComponent from "@/components/UI/LoaderComponent";
+import { notSignedInNotification } from "@/utils/notification";
+import { filterOnSearch } from "@/utils/helper";
+import MenuComponent from "@/components/UI/MenuComponent";
 import { IconNotebook } from "@tabler/icons";
-import { getFetcher } from "../../lib/SWR";
+import { getFetcher } from "@/lib/SWR";
 
 import useSWR from "swr";
 
@@ -20,19 +20,16 @@ const Doubts = () => {
 
   const { data: doubts, error } = useSWR("/api/doubt", getFetcher);
 
-  // @ts-ignore
-  const filterOnBranch = (doubts) => {
+  const filterOnBranch = (doubts: any) => {
     if (branchFilter === "all") {
       return doubts;
     }
 
-    // @ts-ignore
-    return doubts.filter((doubt) => {
+    return doubts.filter((doubt: any) => {
       return doubt.course_id.startsWith(branchFilter);
     });
   };
 
-  // @ts-ignore
   const filteredDoubts = filterOnSearch(searchQuery, filterOnBranch(doubts));
 
   return (
@@ -63,7 +60,7 @@ const Doubts = () => {
                 ? notSignedInNotification("Please sign in to ask a doubt!")
                 : () => {}
             }
-            className={buttonOutlineClasses}
+            className="btn-outline"
           >
             Ask Question
           </Button>
@@ -74,8 +71,7 @@ const Doubts = () => {
 
       <div className="space-y-4">
         {filteredDoubts?.length > 0 &&
-          // @ts-ignore
-          filteredDoubts.map((item) => (
+          filteredDoubts.map((item: any) => (
             <DoubtCard doubt={item} key={item._id} />
           ))}
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { prettifyId } from "../../utils/helper";
+import { prettifyId } from "@/utils/helper";
 import { IconFolder } from "@tabler/icons";
 
 interface CourseCardProps {

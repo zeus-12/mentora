@@ -1,8 +1,8 @@
 import { Avatar, Burger, Drawer, Text, UnstyledButton } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { generateAvatarText } from "../../utils/helper";
-import { GREEN_400 } from "../../lib/constants";
+import { generateAvatarText } from "@/utils/helper";
+import { GREEN_400 } from "@/lib/constants";
 import { Dispatch, SetStateAction } from "react";
 
 const MiddleSectionElements = [
@@ -67,7 +67,6 @@ export const NavbarMiddleSection = ({ className }: { className?: string }) => {
 export const LoginUserComponent = ({ session }: { session: any }) => {
   return (
     <div className="flex justify-center">
-      {/* Logout & SignIn*/}
       {session && (
         <Link href="/user" passHref>
           <UnstyledButton>
@@ -120,11 +119,11 @@ export const NavbarDrawer = ({
   session: any;
 }) => (
   <Drawer
-    className="pt-4 px-2 bg-black"
-    onClick={() => setOpened(false)}
+    className="bg-black"
     opened={opened}
     position="right"
     size="100vh"
+    onClick={() => setOpened(false)}
     onClose={() => setOpened(false)}
     overlayProps={{
       opacity: 0.55,

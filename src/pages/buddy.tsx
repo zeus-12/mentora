@@ -1,17 +1,17 @@
 import { Button, Input, TextInput } from "@mantine/core";
-import MenuComponent from "../components/UI/MenuComponent";
+import MenuComponent from "@/components/UI/MenuComponent";
 import { useState } from "react";
-import BuddyCard from "../components/Buddy/BuddyCard";
-import { availableBranches, buttonOutlineClasses } from "../lib/constants";
+import BuddyCard from "@/components/Buddy/BuddyCard";
+import { availableBranches } from "@/lib/constants";
 import { IconAdjustmentsHorizontal, IconNotebook } from "@tabler/icons";
-import LoaderComponent from "../components/UI/LoaderComponent";
-import NewBuddyModal from "../components/Buddy/NewBuddyModal";
-import { notSignedInNotification } from "../utils/notification";
+import LoaderComponent from "@/components/UI/LoaderComponent";
+import NewBuddyModal from "@/components/Buddy/NewBuddyModal";
+import { notSignedInNotification } from "@/utils/notification";
 import { useSession } from "next-auth/react";
-import { filterOnSearch } from "../utils/helper";
-import BuddyDetailsModal from "../components/Buddy/BuddyDetailsModal";
+import { filterOnSearch } from "@/utils/helper";
+import BuddyDetailsModal from "@/components/Buddy/BuddyDetailsModal";
 import useSWR from "swr";
-import { getFetcher } from "../lib/SWR";
+import { getFetcher } from "@/lib/SWR";
 
 const Buddy = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -103,7 +103,7 @@ const Buddy = () => {
 
         <Button
           variant="outline"
-          className={buttonOutlineClasses}
+          className="btn-outline"
           onClick={() => applyBuddyBtnHandler()}
         >
           Apply Now!

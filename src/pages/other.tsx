@@ -16,7 +16,7 @@ const Other = () => {
     <div>
       <p className="text-3xl mb-4 font-semibold tracking-tight">
         Other <span className="text-green-200"> cool </span>
-        sites!
+        sites for IITM students!
       </p>
       <div className="gap-6 grid grid-cols-1 lg:grid-cols-2">
         {sites.map((site) => (

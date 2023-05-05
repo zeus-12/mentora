@@ -4,13 +4,9 @@ import { Dropzone, IMAGE_MIME_TYPE, PDF_MIME_TYPE } from "@mantine/dropzone";
 import { IconPhoto, IconUpload, IconX } from "@tabler/icons";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
-import { buttonOutlineClasses } from "../../../lib/constants";
-import { postRequestConfig, prettifyId } from "../../../utils/helper";
-import {
-  errorNotification,
-  successNotification,
-} from "../../../utils/notification";
-import FilePreview from "../../../components/Common/FilePreview";
+import { postRequestConfig, prettifyId } from "@/utils/helper";
+import { errorNotification, successNotification } from "@/utils/notification";
+import FilePreview from "@/components/Common/FilePreview";
 
 const NewSubmission = () => {
   const router = useRouter();
@@ -91,7 +87,7 @@ const NewSubmission = () => {
         </p>
         <Button
           loading={loading}
-          className={buttonOutlineClasses}
+          className="btn-outline"
           onClick={submitHandler}
         >
           Submit

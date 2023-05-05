@@ -1,20 +1,18 @@
 import { Badge, Blockquote, Button, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
-import { postRequestConfig, prettifyId } from "../../../utils/helper";
-import { buttonOutlineClasses } from "../../../lib/constants";
-import CommentCard from "../../../components/Common/CommentCard";
-import SubCommentCard from "../../../components/Common/SubCommentCard";
+import { postRequestConfig, prettifyId } from "@/utils/helper";
+import CommentCard from "@/components/Common/CommentCard";
+import SubCommentCard from "@/components/Common/SubCommentCard";
 import {
   errorNotification,
   notSignedInNotification,
-} from "../../../utils/notification";
+} from "@/utils/notification";
 import { useSession } from "next-auth/react";
 import useSwr from "swr";
-import { disableAutoRevalidate, getFetcher } from "../../../lib/SWR";
-
-import FilePreview from "../../../components/Common/FilePreview";
-const name_id_map = require("../../../../name-id-map.json");
+import { disableAutoRevalidate, getFetcher } from "@/lib/SWR";
+import FilePreview from "@/components/Common/FilePreview";
+import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
 
 const CourseDetails = () => {
   const router = useRouter();
@@ -70,7 +68,7 @@ const CourseDetails = () => {
     }
   };
 
-  if (!(courseId in name_id_map)) {
+  if (!(courseId in CourseMapping)) {
     return <div>course doesnt exist</div>;
   }
 
@@ -80,7 +78,7 @@ const CourseDetails = () => {
         <div className="flex justify-between">
           <div className="">
             <p className="text-3xl text-gray-200 font-bold">
-              {name_id_map[courseId]}
+              {CourseMapping[courseId as keyof typeof CourseMapping]}
             </p>
             <p className="text-2xl text-gray-400 font-semibold">
               {courseId && prettifyId(courseId)}
@@ -100,7 +98,7 @@ const CourseDetails = () => {
                         )
                     : () => {}
                 }
-                className={buttonOutlineClasses}
+                className="btn-outline"
               >
                 Add Resources
               </Button>
@@ -146,7 +144,7 @@ const CourseDetails = () => {
           className="my-2"
           {...form.getInputProps("comment")}
         />
-        <Button onClick={addComment} className={buttonOutlineClasses}>
+        <Button onClick={addComment} className="btn-outline">
           Add Comment
         </Button>
 

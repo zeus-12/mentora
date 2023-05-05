@@ -28,3 +28,7 @@ a {
     background: black;
   }
 }
+
+.btn-outline {
+  @apply text-green-500 border-green-500 hover:bg-green-500 hover:text-white;
+}

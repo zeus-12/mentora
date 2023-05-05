@@ -1,14 +1,13 @@
 import { Blockquote, Button, Modal } from "@mantine/core";
 import { IconCurrencyRupee } from "@tabler/icons";
-import { buttonOutlineClasses } from "../../lib/constants";
-import { prettifyId } from "../../utils/helper";
-const idNameMapping = require("../../../name-id-map.json");
+import { prettifyId } from "@/utils/helper";
+import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
 import { useSWRConfig } from "swr";
 import {
   errorNotification,
   notSignedInNotification,
   successNotification,
-} from "../../utils/notification";
+} from "@/utils/notification";
 import { useSession } from "next-auth/react";
 
 interface BuddyDetailsProps {
@@ -69,7 +68,11 @@ const BuddyDetailsModal: React.FC<BuddyDetailsProps> = ({
             </p>
           </div>
           <p className="text-gray-500 flex">
-            {idNameMapping[buddyData?.course_id?.toUpperCase()]}
+            {
+              CourseMapping[
+                buddyData?.course_id?.toUpperCase() as keyof typeof CourseMapping
+              ]
+            }
           </p>
 
           <Blockquote color="green">
@@ -86,10 +89,7 @@ const BuddyDetailsModal: React.FC<BuddyDetailsProps> = ({
           </div>
 
           {!buddyData?.self && !buddyData?.applied && (
-            <Button
-              onClick={applyBuddyHandler}
-              className={buttonOutlineClasses}
-            >
+            <Button onClick={applyBuddyHandler} className="btn-outline">
               Apply!
             </Button>
           )}

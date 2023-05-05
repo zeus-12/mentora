@@ -8,7 +8,6 @@ const Footer = () => {
           Other cool Sites
         </p>
       </Link>
-      {/* <p className="text-center">Made with ❤️ as part of TechSoc IITM.</p> */}
       <Link passHref href="/feedback">
         <p className="text-green-300 hover:cursor-pointer hover:underline underline-offset-4 ">
           Feedback

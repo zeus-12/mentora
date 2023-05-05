@@ -1,4 +1,4 @@
-import * as courseNameIdMap from "../../name-id-map.json";
+import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
 
 export const prettifyId = (id: string) => {
   if (!id) {
@@ -25,9 +25,8 @@ export const getCourseNameFromId = (id: string) => {
   }
   id = id.toUpperCase();
 
-  if (id in courseNameIdMap) {
-    // @ts-ignore
-    return courseNameIdMap[id];
+  if (id in CourseMapping) {
+    return CourseMapping[id as keyof typeof CourseMapping];
   } else {
     return;
   }
@@ -36,7 +35,7 @@ export const getCourseNameFromId = (id: string) => {
 export const filterOnSearch = (
   searchQuery: string,
   data: any,
-  initial: any
+  initial?: any
 ) => {
   if (searchQuery.trim().length === 0) {
     if (initial) return initial;
@@ -46,8 +45,8 @@ export const filterOnSearch = (
       (item: any) =>
         (
           item.course_name ||
-          courseNameIdMap[
-            item.course_id.toUpperCase() as keyof typeof courseNameIdMap
+          CourseMapping[
+            item.course_id.toUpperCase() as keyof typeof CourseMapping
           ]
         )
           ?.replaceAll(" ", "")
