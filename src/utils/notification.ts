@@ -5,7 +5,7 @@ import { showNotification } from "@mantine/notifications";
 export const errorNotificationProps = {
   // @ts-ignore
   // eslint-disable-next-line
-  // icon: () => <IconX size={18} />,
+  // icon: <IconX size={18} />,
   color: "red",
 };
 
