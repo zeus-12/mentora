@@ -21,6 +21,8 @@ export default function Home() {
     branchFilter
   );
 
+  console.log(totalPages);
+
   return (
     <div className="flex flex-1 flex-col">
       <div className="flex-1">
@@ -75,7 +77,7 @@ export default function Home() {
             value={curPage}
             onChange={(page) => setCurPage(page)}
             withControls={false}
-            total={Math.ceil(totalPages)}
+            total={totalPages}
           />
         </div>
       )}

@@ -74,7 +74,7 @@ export const paginatedFilterCoursesOnSearch = (
   });
 
   const maxCoursesPerPage = 50;
-  const totalPages = results.length / maxCoursesPerPage;
+  const totalPages = Math.ceil(results.length / maxCoursesPerPage);
 
   const slicedFilteredCourse = resultsArray.slice(
     (curPage - 1) * maxCoursesPerPage,

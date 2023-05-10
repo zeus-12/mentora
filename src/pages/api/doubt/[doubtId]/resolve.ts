@@ -1,7 +1,6 @@
-import { Types } from "mongoose";
-import Doubt from "../../../../models/doubt";
-import dbConnect from "../../../../lib/dbConnect";
-import getServerSession from "../../../../utils/getServerSession";
+import Doubt from "@/models/doubt";
+import dbConnect from "@/lib/dbConnect";
+import getServerSession from "@/utils/getServerSession";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -21,8 +20,7 @@ export default async function handler(
 
     try {
       const doubt = await Doubt.findOneAndUpdate(
-        // @ts-ignore
-        { _id: Types.ObjectId(doubtId), user: user },
+        { _id: doubtId, user: user },
         { status: "RESOLVED" },
         { new: true }
       ).lean();
