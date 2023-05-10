@@ -1,6 +1,6 @@
-import Buddy from "../../../models/buddy";
-import dbConnect from "../../../lib/dbConnect";
-import getServerSession from "../../../utils/getServerSession";
+import Buddy from "@/models/buddy";
+import dbConnect from "@/lib/dbConnect";
+import getServerSession from "@/utils/getServerSession";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -52,12 +52,10 @@ export default async function handler(
         } else {
           buddy.applied = false;
         }
+        delete buddy.user;
 
         buddy.self = buddy.user === user;
       });
-
-      // @ts-ignore
-      delete buddyDetails.user;
 
       return res.status(200).json({ message: "success", data: buddyDetails });
     } catch (error: any) {

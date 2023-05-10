@@ -1,6 +1,6 @@
 import { Image } from "@mantine/core";
 import { IMAGE_MIME_TYPE, PDF_MIME_TYPE } from "@mantine/dropzone";
-import { IconPhoto } from "@tabler/icons";
+import { IconPhoto } from "@tabler/icons-react";
 
 interface FilePreviewType {
   file: any;
@@ -15,8 +15,7 @@ const FilePreview: React.FC<FilePreviewType> = ({ file }) => {
         <Image
           alt={file.file_name || file.name}
           src={imageUrl}
-          // @ts-ignore
-          props={file.file_name || file.name}
+          // props={file.file_name || file.name}
         />
       </div>
     );

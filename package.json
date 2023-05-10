@@ -18,7 +18,7 @@
     "@mantine/hooks": "^6.0.10",
     "@mantine/next": "^6.0.10",
     "@mantine/notifications": "^6.0.10",
-    "@tabler/icons": "1.104.0",
+    "@tabler/icons-react": "^2.17.0",
     "date-fns": "^2.30.0",
     "googleapis": "^118.0.0",
     "mongoose": "^7.1.0",

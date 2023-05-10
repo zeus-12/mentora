@@ -51,8 +51,7 @@ export default async function handler(
 
         if (answer.parent_id) {
           const parentAnswer = answers.find(
-            // @ts-ignore
-            (c) => c._id.toString() === answer.parent_id
+            (c) => (c._id as string).toString() === answer.parent_id
           );
 
           if (parentAnswer) {

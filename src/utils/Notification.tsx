@@ -1,17 +1,13 @@
-// @ts-nocheck
-import { IconCheck, IconX } from "@tabler/icons";
-import { showNotification } from "@mantine/notifications";
+import { IconCheck, IconX } from "@tabler/icons-react";
+import { notifications } from "@mantine/notifications";
 
 export const errorNotificationProps = {
-  // @ts-ignore
-  // eslint-disable-next-line
-  // icon: <IconX size={18} />,
+  icon: <IconX size={18} />,
   color: "red",
 };
 
-// @ts-ignore
 export const notSignedInNotification = (message: string) => {
-  showNotification({
+  notifications.show({
     title: "Please Sign In",
     message,
     ...errorNotificationProps,
@@ -19,7 +15,7 @@ export const notSignedInNotification = (message: string) => {
 };
 
 export const errorNotification = (message: string) => {
-  showNotification({
+  notifications.show({
     title: "Error",
     message,
     ...errorNotificationProps,
@@ -27,10 +23,10 @@ export const errorNotification = (message: string) => {
 };
 
 export const successNotification = (message: string) => {
-  showNotification({
+  notifications.show({
     title: "Success",
     message,
+    icon: <IconCheck size={18} />,
     color: "green",
-    // icon: <IconCheck size={18} />,
   });
 };

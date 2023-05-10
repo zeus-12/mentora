@@ -7,12 +7,34 @@ import SubCommentCard from "@/components/Common/SubCommentCard";
 import {
   errorNotification,
   notSignedInNotification,
-} from "@/utils/notification";
+} from "@/utils/Notification";
 import { useSession } from "next-auth/react";
 import useSwr from "swr";
 import { disableAutoRevalidate, getFetcher } from "@/lib/SWR";
 import FilePreview from "@/components/Common/FilePreview";
 import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
+
+interface CourseResource {
+  course_id: string;
+  resources: ResourcesProps[];
+}
+
+interface Comments {
+  course_id: string;
+  user: string;
+  comment: string;
+  date: Date;
+  parent_id?: string;
+  liked_users: string[];
+}
+
+interface ResourcesProps {
+  file_name: string;
+  file_url: string;
+  file_type: string;
+  date: Date;
+  uploader: string;
+}
 
 const CourseDetails = () => {
   const router = useRouter();
@@ -122,17 +144,18 @@ const CourseDetails = () => {
         {/* course resources */}
         <div className="flex flex-wrap gap-2">
           {courseResources &&
-            // @ts-ignore
-            courseResources?.resources?.map((resource, index) => (
-              <a
-                href={resource.file_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={index}
-              >
-                <FilePreview file={resource} />
-              </a>
-            ))}
+            courseResources?.resources?.map(
+              (resource: ResourcesProps, index: number) => (
+                <a
+                  href={resource.file_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={index}
+                >
+                  <FilePreview file={resource} />
+                </a>
+              )
+            )}
         </div>
       </div>
 

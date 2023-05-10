@@ -94,12 +94,14 @@ export const Logo = ({
   setOpened,
   textSize = "text-2xl",
 }: {
-  setOpened: Dispatch<SetStateAction<boolean>>;
+  setOpened?: Dispatch<SetStateAction<boolean>>;
   textSize?: string;
 }) => (
   <Link href="/" passHref>
     <div
-      onClick={() => setOpened(false)}
+      onClick={() => {
+        setOpened ? setOpened(false) : null;
+      }}
       className="flex items-center hover:cursor-pointer"
     >
       <p className={textSize + " tracking-tighter font-bold"}>

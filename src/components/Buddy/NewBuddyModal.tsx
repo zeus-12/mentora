@@ -1,10 +1,10 @@
 import { Button, Modal, Radio, Textarea, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { IconX } from "@tabler/icons";
+import { IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import { useSWRConfig } from "swr";
 import { postRequestConfig } from "@/utils/helper";
-import { errorNotification, successNotification } from "@/utils/notification";
+import { errorNotification, successNotification } from "@/utils/Notification";
 
 interface NewBuddyModalProps {
   newBuddyModal: boolean;
@@ -65,15 +65,16 @@ const NewBuddyModal: React.FC<NewBuddyModalProps> = ({
   return (
     <Modal
       withCloseButton={false}
-      transition="fade"
-      transitionDuration={600}
-      transitionTimingFunction="ease"
+      transitionProps={{
+        transition: "fade",
+        duration: 600,
+        timingFunction: "ease",
+      }}
       opened={newBuddyModal}
       onClose={closeNewBuddyModal}
       centered={true}
       classNames={{
-        // @ts-ignore
-        modal: "bg-black flex flex-col justify-center items-center",
+        content: "bg-black flex flex-col justify-center items-center",
       }}
       size="lg"
       radius="md"
@@ -91,8 +92,10 @@ const NewBuddyModal: React.FC<NewBuddyModalProps> = ({
           withAsterisk
           {...form.getInputProps("buddyType")}
         >
-          <Radio value="tutor" label="Tutor" />
-          <Radio value="peer" label="Peer" />
+          <div className="flex gap-4 py-4">
+            <Radio value="tutor" label="Tutor" />
+            <Radio value="peer" label="Peer" />
+          </div>
         </Radio.Group>
 
         <TextInput

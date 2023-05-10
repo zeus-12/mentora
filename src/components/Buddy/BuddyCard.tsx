@@ -1,5 +1,5 @@
 import { getCourseNameFromId, prettifyId } from "@/utils/helper";
-import { IconCurrencyRupee } from "@tabler/icons";
+import { IconCurrencyRupee } from "@tabler/icons-react";
 
 interface BuddyCardProps {
   onClick?: () => void;

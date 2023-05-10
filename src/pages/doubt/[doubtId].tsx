@@ -10,7 +10,7 @@ import {
   errorNotification,
   notSignedInNotification,
   successNotification,
-} from "@/utils/notification";
+} from "@/utils/Notification";
 import useSWR from "swr";
 import { getFetcher } from "@/lib/SWR";
 import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
@@ -23,8 +23,9 @@ const DoubtDetailsPage = () => {
   const { doubtId } = router.query;
 
   const { data: answers, mutate } = useSWR(
-    `/api/answer/${doubtId}`,
-    getFetcher
+    doubtId ? `/api/answer/${doubtId}` : null,
+    getFetcher,
+    {}
   );
 
   const form = useForm({
@@ -62,7 +63,7 @@ const DoubtDetailsPage = () => {
   };
 
   const { data: doubt, mutate: mutateDoubtData } = useSWR(
-    `/api/doubt/${doubtId}`,
+    doubtId ? `/api/doubt/${doubtId}` : null,
     getFetcher
   );
 

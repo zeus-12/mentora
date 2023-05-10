@@ -36,8 +36,7 @@ export default async function handler(
 
         if (comment.parent_id) {
           const parentComment = comments.find(
-            // @ts-ignore
-            (c) => c._id.toString() === comment.parent_id
+            (c) => (c._id as string).toString() === comment.parent_id
           );
 
           if (parentComment) {

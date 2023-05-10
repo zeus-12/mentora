@@ -1,5 +1,5 @@
 import { Blockquote, Button, Modal } from "@mantine/core";
-import { IconCurrencyRupee } from "@tabler/icons";
+import { IconCurrencyRupee } from "@tabler/icons-react";
 import { prettifyId } from "@/utils/helper";
 import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
 import { useSWRConfig } from "swr";
@@ -7,7 +7,7 @@ import {
   errorNotification,
   notSignedInNotification,
   successNotification,
-} from "@/utils/notification";
+} from "@/utils/Notification";
 import { useSession } from "next-auth/react";
 
 interface BuddyDetailsProps {
@@ -46,14 +46,15 @@ const BuddyDetailsModal: React.FC<BuddyDetailsProps> = ({
     <div>
       <Modal
         withCloseButton={false}
-        transition="fade"
-        transitionTimingFunction="ease"
+        transitionProps={{
+          transition: "fade",
+          timingFunction: "ease",
+        }}
         opened={!!buddyData}
         onClose={closeDetailsModal}
         centered={true}
         classNames={{
-          // @ts-ignore
-          modal: "bg-black md:p-4 lg:p-8",
+          content: "bg-black md:p-4 lg:p-8",
         }}
         size="lg"
         radius="md"
@@ -88,7 +89,7 @@ const BuddyDetailsModal: React.FC<BuddyDetailsProps> = ({
             )}
           </div>
 
-          {!buddyData?.self && !buddyData?.applied && (
+          {buddyData && !buddyData?.self && !buddyData?.applied && (
             <Button onClick={applyBuddyHandler} className="btn-outline">
               Apply!
             </Button>

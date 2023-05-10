@@ -3,7 +3,7 @@ import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { postRequestConfig } from "@/utils/helper";
-import { errorNotification } from "@/utils/notification";
+import { errorNotification } from "@/utils/Notification";
 
 const NewDoubt = () => {
   const [loading, setLoading] = useState(false);

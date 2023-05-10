@@ -7,7 +7,7 @@ import {
   errorNotification,
   notSignedInNotification,
   successNotification,
-} from "@/utils/notification";
+} from "@/utils/Notification";
 
 const Feedback = () => {
   const { data: session } = useSession();

@@ -1,4 +1,4 @@
-import { errorNotification } from "@/utils/notification";
+import { errorNotification } from "@/utils/Notification";
 
 export const getFetcher = (...args: any) =>
   // @ts-ignore

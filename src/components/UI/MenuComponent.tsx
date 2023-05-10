@@ -1,5 +1,5 @@
 import { Button, Menu } from "@mantine/core";
-import { IconCheck } from "@tabler/icons";
+import { IconCheck } from "@tabler/icons-react";
 
 interface MenuComponentProps {
   title: string;

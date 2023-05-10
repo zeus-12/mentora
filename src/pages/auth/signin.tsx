@@ -2,6 +2,7 @@ import { Button, Image } from "@mantine/core";
 import { signIn } from "next-auth/react";
 import { Logo } from "../../components/UI/NavbarComponents";
 import getServerSession from "../../utils/getServerSession";
+import { NextPageContext } from "next";
 
 export default function SignIn() {
   // CHANGE WHEN ADDING MORE PROVIDERS
@@ -14,7 +15,6 @@ export default function SignIn() {
           className="flex flex-col items-center gap-4 justify-center"
           key={provider.name}
         >
-          {/* @ts-ignore */}
           <Logo textSize="text-6xl" />
 
           <div>
@@ -46,7 +46,6 @@ export default function SignIn() {
   );
 }
 
-// @ts-ignore
 export const getServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res);
 

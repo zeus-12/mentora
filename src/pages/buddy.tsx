@@ -3,15 +3,26 @@ import MenuComponent from "@/components/UI/MenuComponent";
 import { useState } from "react";
 import BuddyCard from "@/components/Buddy/BuddyCard";
 import { availableBranches } from "@/lib/constants";
-import { IconAdjustmentsHorizontal, IconNotebook } from "@tabler/icons";
+import { IconAdjustmentsHorizontal, IconNotebook } from "@tabler/icons-react";
 import LoaderComponent from "@/components/UI/LoaderComponent";
 import NewBuddyModal from "@/components/Buddy/NewBuddyModal";
-import { notSignedInNotification } from "@/utils/notification";
+import { notSignedInNotification } from "@/utils/Notification";
 import { useSession } from "next-auth/react";
 import { filterOnSearch } from "@/utils/helper";
 import BuddyDetailsModal from "@/components/Buddy/BuddyDetailsModal";
 import useSWR from "swr";
 import { getFetcher } from "@/lib/SWR";
+
+interface BuddyType {
+  course_id: string;
+  user: string;
+  date: Date;
+  message: string;
+  buddyType: string;
+  money: string;
+  applied_users: string[];
+  _id: string;
+}
 
 const Buddy = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -20,10 +31,10 @@ const Buddy = () => {
   const [buddyTypeFilter, setBuddyTypeFilter] = useState("all");
   const [branchFilter, setBranchFilter] = useState("all");
 
-  const [cur, setCur] = useState(null);
+  const [cur, setCur] = useState<BuddyType>();
 
   const closeDetailsModal = () => {
-    setCur(null);
+    setCur(undefined);
   };
 
   const closeNewBuddyModal = () => {
@@ -42,32 +53,26 @@ const Buddy = () => {
 
   const availableBuddyTypeFilters = ["all", "tutor", "peer"];
 
-  // @ts-ignore
-  const filterCourseBranches = (data) => {
+  const filterCourseBranches = (data: BuddyType[]) => {
     if (branchFilter === "all") return data;
-    // @ts-ignore
     return data.filter((buddy) =>
       buddy.course_id.toUpperCase().startsWith(branchFilter)
     );
   };
 
-  // @ts-ignore
-  const filterBuddyRequests = (data) => {
+  const filterBuddyRequests = (data: BuddyType[]) => {
     switch (buddyTypeFilter) {
       case "all":
         return data;
       case "tutor":
-        // @ts-ignore
         return data.filter((buddy) => buddy.buddyType === "tutor");
       case "peer":
-        // @ts-ignore
         return data.filter((buddy) => buddy.buddyType === "peer");
       default:
         return data;
     }
   };
 
-  // @ts-ignore
   const filteredBuddies = filterOnSearch(
     searchQuery,
     filterBuddyRequests(filterCourseBranches(buddies))
@@ -114,8 +119,7 @@ const Buddy = () => {
       {buddies && buddies?.length === 0 && <p>No results found!</p>}
       {filteredBuddies?.length > 0 && (
         <div className="grid auto-rows-max justify-items-stretch grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-3">
-          {/* @ts-ignore */}
-          {filteredBuddies.map((buddy) => (
+          {filteredBuddies.map((buddy: BuddyType) => (
             <BuddyCard
               onClick={() => setCur(buddy)}
               buddy={buddy}

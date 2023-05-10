@@ -1,6 +1,5 @@
-import { Types } from "mongoose";
-import Doubt from "../../../../models/doubt";
-import dbConnect from "../../../../lib/dbConnect";
+import Doubt from "@/models/doubt";
+import dbConnect from "@/lib/dbConnect";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -12,8 +11,7 @@ export default async function handler(
   if (req.method === "GET") {
     await dbConnect();
     try {
-      // @ts-ignore
-      const doubt = await Doubt.findOne({ _id: Types.ObjectId(doubtId) })
+      const doubt = await Doubt.findOne({ _id: doubtId })
         .select("title course_id doubt user status")
         .lean();
       return res.status(200).json({ message: "success", data: doubt });

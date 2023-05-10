@@ -5,10 +5,10 @@ import { useState } from "react";
 import { availableBranches } from "@/lib/constants";
 import DoubtCard from "@/components/Doubt/DoubtCard";
 import LoaderComponent from "@/components/UI/LoaderComponent";
-import { notSignedInNotification } from "@/utils/notification";
+import { notSignedInNotification } from "@/utils/Notification";
 import { filterOnSearch } from "@/utils/helper";
 import MenuComponent from "@/components/UI/MenuComponent";
-import { IconNotebook } from "@tabler/icons";
+import { IconNotebook } from "@tabler/icons-react";
 import { getFetcher } from "@/lib/SWR";
 
 import useSWR from "swr";

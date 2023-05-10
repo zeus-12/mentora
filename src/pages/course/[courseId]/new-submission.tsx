@@ -1,11 +1,11 @@
 import { BlobServiceClient } from "@azure/storage-blob";
 import { Button, Group, SimpleGrid, Text } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE, PDF_MIME_TYPE } from "@mantine/dropzone";
-import { IconPhoto, IconUpload, IconX } from "@tabler/icons";
+import { IconPhoto, IconUpload, IconX } from "@tabler/icons-react";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import { postRequestConfig, prettifyId } from "@/utils/helper";
-import { errorNotification, successNotification } from "@/utils/notification";
+import { errorNotification, successNotification } from "@/utils/Notification";
 import FilePreview from "@/components/Common/FilePreview";
 
 const NewSubmission = () => {
