@@ -3,7 +3,7 @@ import { useState } from "react";
 import CourseCard from "@/components/Course/CourseCard";
 import LoaderComponent from "@/components/UI/LoaderComponent";
 import { IconNotebook } from "@tabler/icons-react";
-import { filterOnSearch } from "@/utils/helper";
+import { paginatedFilterCoursesOnSearch } from "@/utils/helper";
 import MenuComponent from "@/components/UI/MenuComponent";
 import { availableBranches } from "@/lib/constants";
 import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
@@ -12,44 +12,13 @@ export default function Home() {
   const [branchFilter, setBranchFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const generateCoursesData = (courses: { [key: string]: string }) => {
-    const coursesData: { course_name: string; course_id: string }[] = [];
-
-    Object.keys(courses).map((item) => {
-      coursesData.push({
-        course_name: courses[item],
-        course_id: item,
-      });
-    });
-
-    return coursesData;
-  };
-
-  const courses = generateCoursesData(CourseMapping);
-
-  const branchFilteredCourses = () => {
-    if (branchFilter === "all") {
-      return courses;
-    }
-
-    return courses.filter((course) => {
-      return course.course_id.startsWith(branchFilter);
-    });
-  };
-
-  const filteredCourses = filterOnSearch(
-    searchQuery,
-    branchFilteredCourses(),
-    []
-  );
-
   const [curPage, setCurPage] = useState(1);
 
-  const maxCoursesPerPage = 50;
-  const totalPages = filteredCourses.length / maxCoursesPerPage;
-  const slicedFilteredCourse = filteredCourses.slice(
-    (curPage - 1) * maxCoursesPerPage,
-    curPage * maxCoursesPerPage
+  // @ts-ignore
+  const { courses, totalPages } = paginatedFilterCoursesOnSearch(
+    searchQuery,
+    curPage,
+    branchFilter
   );
 
   return (
@@ -74,10 +43,9 @@ export default function Home() {
             title={"Course Branch"}
           />
         </div>
-        {courses.length === 0 && <LoaderComponent />}
         <div className="flex justify-center">
-          {searchQuery.trim().length !== 0 && filteredCourses?.length === 0 && (
-            <p>No course found!</p>
+          {searchQuery.trim().length !== 0 && courses?.length === 0 && (
+            <p className="text-gray-400 mt-2">No course found!</p>
           )}
 
           {searchQuery.trim().length === 0 && (
@@ -86,9 +54,9 @@ export default function Home() {
             </p>
           )}
 
-          {slicedFilteredCourse.length > 0 && (
+          {courses?.length > 0 && (
             <div className="mt-3 grid auto-rows-max justify-items-stretch grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-              {slicedFilteredCourse?.map(
+              {courses?.map(
                 (course: { course_name: string; course_id: string }) => (
                   <CourseCard
                     key={course.course_id}
@@ -101,13 +69,16 @@ export default function Home() {
           )}
         </div>
       </div>
-      <div className="mx-auto mt-4">
-        <Pagination
-          onChange={(page) => setCurPage(page)}
-          withControls={false}
-          total={Math.ceil(totalPages)}
-        />
-      </div>
+      {totalPages > 1 && (
+        <div className="mx-auto mt-4">
+          <Pagination
+            value={curPage}
+            onChange={(page) => setCurPage(page)}
+            withControls={false}
+            total={Math.ceil(totalPages)}
+          />
+        </div>
+      )}
     </div>
   );
 }

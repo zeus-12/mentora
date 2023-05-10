@@ -19,13 +19,17 @@ interface CourseResource {
   resources: ResourcesProps[];
 }
 
-interface Comments {
+interface Comment {
   course_id: string;
   user: string;
   comment: string;
   date: Date;
   parent_id?: string;
   liked_users: string[];
+  like_count: number;
+  liked: boolean;
+  _id: string;
+  subComments?: Comment[];
 }
 
 interface ResourcesProps {
@@ -173,8 +177,7 @@ const CourseDetails = () => {
 
         <div className="space-y-4 mt-4">
           {comments?.length > 0 &&
-            // @ts-ignore
-            comments.map((comment, index) => (
+            comments.map((comment: Comment, index: number) => (
               <div key={index}>
                 <CommentCard
                   session={session}
@@ -188,8 +191,8 @@ const CourseDetails = () => {
                   parentId={comment._id}
                   mutate={mutate}
                 />
-                {comment.subComments?.length > 0 &&
-                  // @ts-ignore
+                {comment.subComments &&
+                  comment.subComments?.length > 0 &&
                   comment.subComments.map((subComment, index) => (
                     <SubCommentCard
                       like_count={subComment.like_count}
