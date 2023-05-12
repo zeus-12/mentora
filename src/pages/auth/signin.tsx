@@ -1,8 +1,7 @@
 import { Button, Image } from "@mantine/core";
 import { signIn } from "next-auth/react";
-import { Logo } from "../../components/UI/NavbarComponents";
-import getServerSession from "../../utils/getServerSession";
-import { NextPageContext } from "next";
+import { Logo } from "@/components/UI/NavbarComponents";
+import getServerSession from "@/utils/getServerSession";
 
 export default function SignIn() {
   // CHANGE WHEN ADDING MORE PROVIDERS
@@ -46,7 +45,7 @@ export default function SignIn() {
   );
 }
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (context: any) => {
   const session = await getServerSession(context.req, context.res);
 
   if (session) {

@@ -14,10 +14,10 @@ import { disableAutoRevalidate, getFetcher } from "@/lib/SWR";
 import FilePreview from "@/components/Common/FilePreview";
 import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
 
-interface CourseResource {
-  course_id: string;
-  resources: ResourcesProps[];
-}
+// interface CourseResource {
+//   course_id: string;
+//   resources: ResourcesProps[];
+// }
 
 interface Comment {
   course_id: string;
@@ -42,11 +42,12 @@ interface ResourcesProps {
 
 const CourseDetails = () => {
   const router = useRouter();
-  const courseId = (router.query.courseId as string).toUpperCase();
+  let { courseId } = router.query as { courseId: string };
+  courseId = courseId?.toUpperCase();
   const { data: session } = useSession();
 
-  const { data: comments, mutate } = useSwr(
-    `/api/comment/${courseId}`,
+  const { data: comments, mutate } = useSwr<Comment[]>(
+    courseId ? `/api/comment/${courseId}` : null,
     getFetcher
   );
 
@@ -131,10 +132,10 @@ const CourseDetails = () => {
             </a>
             <div className="flex gap-2">
               <Badge color="green" size="lg">
-                Theory
+                {courseData?.course_type || "Unknown"}
               </Badge>
               <Badge color="green" size="lg">
-                Credits: 9{" "}
+                Credits: {courseData?.credits}{" "}
               </Badge>
             </div>
           </div>
@@ -176,7 +177,8 @@ const CourseDetails = () => {
         </Button>
 
         <div className="space-y-4 mt-4">
-          {comments?.length > 0 &&
+          {comments &&
+            comments.length > 0 &&
             comments.map((comment: Comment, index: number) => (
               <div key={index}>
                 <CommentCard

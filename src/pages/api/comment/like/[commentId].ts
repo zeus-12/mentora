@@ -1,6 +1,6 @@
-import Comment from "../../../../models/comment";
-import dbConnect from "../../../../lib/dbConnect";
-import getServerSession from "../../../../utils/getServerSession";
+import Comment from "@/models/comment";
+import dbConnect from "@/lib/dbConnect";
+import getServerSession from "@/utils/getServerSession";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

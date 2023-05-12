@@ -1,7 +1,7 @@
 // fetch all comments for a particular course
-import getServerSession from "../../../../utils/getServerSession";
-import Comments from "../../../../models/comment";
-import dbConnect from "../../../../lib/dbConnect";
+import getServerSession from "@/utils/getServerSession";
+import Comments from "@/models/comment";
+import dbConnect from "@/lib/dbConnect";
 
 import { NextApiRequest, NextApiResponse } from "next";
 

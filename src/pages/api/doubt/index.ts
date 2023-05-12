@@ -1,6 +1,6 @@
-import Doubt from "../../../models/doubt";
-import dbConnect from "../../../lib/dbConnect";
-import getServerSession from "../../../utils/getServerSession";
+import Doubt from "@/models/doubt";
+import dbConnect from "@/lib/dbConnect";
+import getServerSession from "@/utils/getServerSession";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

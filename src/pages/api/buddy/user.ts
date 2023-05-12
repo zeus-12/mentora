@@ -1,6 +1,6 @@
-import Buddy from "../../../models/buddy";
-import dbConnect from "../../../lib/dbConnect";
-import getServerSession from "../../../utils/getServerSession";
+import Buddy from "@/models/buddy";
+import dbConnect from "@/lib/dbConnect";
+import getServerSession from "@/utils/getServerSession";
 
 import { NextApiRequest, NextApiResponse } from "next";
 

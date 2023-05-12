@@ -1,6 +1,6 @@
 // for the COURSE SECTION
-import dbConnect from "../../../lib/dbConnect";
-import Course from "../../../models/course";
+import dbConnect from "@/lib/dbConnect";
+import Course from "@/models/course";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

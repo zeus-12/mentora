@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import getServerSession from "../../utils/getServerSession";
+import getServerSession from "@/utils/getServerSession";
 
 import { NextApiRequest, NextApiResponse } from "next";
 

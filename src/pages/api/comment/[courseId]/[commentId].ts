@@ -1,7 +1,7 @@
 // to reply to a comment
-import dbConnect from "../../../../lib/dbConnect";
-import getServerSession from "../../../../utils/getServerSession";
-import Comment from "../../../../models/comment";
+import dbConnect from "@/lib/dbConnect";
+import getServerSession from "@/utils/getServerSession";
+import Comment from "@/models/comment";
 
 import { NextApiRequest, NextApiResponse } from "next";
 
