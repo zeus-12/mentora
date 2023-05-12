@@ -1,1 +1,1 @@
-- replace azure blob with upload thing
+- use zod schemas and store it in a diff file

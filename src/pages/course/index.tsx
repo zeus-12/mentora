@@ -52,7 +52,7 @@ export default function Home() {
           )}
 
           {courses?.length > 0 && (
-            <div className="mt-3 grid auto-rows-max justify-items-stretch grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
               {courses?.map(
                 (course: { course_name: string; course_id: string }) => (
                   <CourseCard

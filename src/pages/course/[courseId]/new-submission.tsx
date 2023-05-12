@@ -1,11 +1,12 @@
 import { Button, Group, SimpleGrid, Text } from "@mantine/core";
-import { Dropzone, IMAGE_MIME_TYPE, PDF_MIME_TYPE } from "@mantine/dropzone";
-import { IconPhoto, IconUpload, IconX } from "@tabler/icons-react";
 import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { postRequestConfig, prettifyId } from "@/utils/helper";
 import { errorNotification } from "@/utils/Notification";
 import FilePreview from "@/components/Common/FilePreview";
+import { UploadButton } from "@uploadthing/react";
+import type { OurFileRouter } from "@/lib/uploadthing";
+import "@uploadthing/react/styles.css";
 
 const NewSubmission = () => {
   const router = useRouter();
@@ -13,32 +14,32 @@ const NewSubmission = () => {
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState([]);
 
-  const handleUpload = (file: any) => {
-    // @ts-ignore
-    setFiles((prevState) => [...prevState, ...file]);
-  };
+  // const handleUpload = (file: any) => {
+  //   // @ts-ignore
+  //   setFiles((prevState) => [...prevState, ...file]);
+  // };
 
-  // @ts-ignore
-  const addFileToDb = async (newFileName: string, file) => {
-    const res = await fetch(`/api/resource/${courseId}`, {
-      ...postRequestConfig,
-      body: JSON.stringify({
-        file_name: newFileName,
-        file_url: `https://mentora.blob.core.windows.net/course/${newFileName}`,
-        file_type: file.type,
-      }),
-    });
-    const data = await res.json();
-    return data;
-  };
+  // // @ts-ignore
+  // const addFileToDb = async (newFileName: string, file) => {
+  //   const res = await fetch(`/api/resource/${courseId}`, {
+  //     ...postRequestConfig,
+  //     body: JSON.stringify({
+  //       file_name: newFileName,
+  //       file_url: `https://mentora.blob.core.windows.net/course/${newFileName}`,
+  //       file_type: file.type,
+  //     }),
+  //   });
+  //   const data = await res.json();
+  //   return data;
+  // };
 
-  const submitHandler = async () => {
-    files.map(async (file) => {
-      // @ts-ignore
-      const newFileName = `${courseId}/${file.name}`;
-      // uploadFileToBlob(file, newFileName);
-    });
-  };
+  // const submitHandler = async () => {
+  //   files.map(async (file) => {
+  //     // @ts-ignore
+  //     const newFileName = `${courseId}/${file.name}`;
+  //     // uploadFileToBlob(file, newFileName);
+  //   });
+  // };
 
   return (
     <div className="px-1 flex-1 sm:px-2 md:px-4 lg:px-6 xl:px-32">
@@ -49,16 +50,25 @@ const NewSubmission = () => {
         <p className="text-3xl font-semibold tracking-tighter mb-2">
           Add Materials!
         </p>
-        <Button
-          loading={loading}
-          className="btn-outline"
-          onClick={submitHandler}
-        >
+        <Button loading={loading} className="btn-outline" onClick={() => {}}>
           Submit
         </Button>
       </div>
 
-      <Dropzone
+      <div className="">
+        <UploadButton<OurFileRouter>
+          endpoint="courseResourcesUploader"
+          onClientUploadComplete={() => {
+            alert("Upload Completed");
+          }}
+          onUploadError={(error: any) => {
+            // Do something with the error.
+            alert(`ERROR! ${error}`);
+          }}
+        />
+      </div>
+
+      {/* <Dropzone
         onDrop={(file) => handleUpload(file)}
         onReject={(files) =>
           errorNotification("File rejected, check file size and format!")
@@ -90,7 +100,7 @@ const NewSubmission = () => {
             </Text>
           </div>
         </Group>
-      </Dropzone>
+      </Dropzone> */}
 
       <SimpleGrid
         className="gap-8"
