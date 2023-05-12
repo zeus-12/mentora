@@ -72,10 +72,8 @@ const CommentCard: React.FC<CommentCardProps> = ({
       return;
     }
 
-    let requestBody = {};
-    // @ts-ignore
-    requestBody[type] = form.values.comment;
-    // setLoading(true);
+    let requestBody = { [type]: form.values.comment };
+
     const res = await fetch(`/api/${type}/${id}/${parentId}`, {
       ...postRequestConfig,
       body: JSON.stringify(requestBody),

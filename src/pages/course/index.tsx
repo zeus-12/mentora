@@ -1,12 +1,10 @@
 import { Pagination, TextInput } from "@mantine/core";
 import { useState } from "react";
 import CourseCard from "@/components/Course/CourseCard";
-import LoaderComponent from "@/components/UI/LoaderComponent";
 import { IconNotebook } from "@tabler/icons-react";
 import { paginatedFilterCoursesOnSearch } from "@/utils/helper";
 import MenuComponent from "@/components/UI/MenuComponent";
 import { availableBranches } from "@/lib/constants";
-import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
 
 export default function Home() {
   const [branchFilter, setBranchFilter] = useState("all");
@@ -14,14 +12,11 @@ export default function Home() {
 
   const [curPage, setCurPage] = useState(1);
 
-  // @ts-ignore
   const { courses, totalPages } = paginatedFilterCoursesOnSearch(
     searchQuery,
     curPage,
     branchFilter
   );
-
-  console.log(totalPages);
 
   return (
     <div className="flex flex-1 flex-col">

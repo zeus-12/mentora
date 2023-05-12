@@ -1,7 +1,7 @@
 import { errorNotification } from "@/utils/Notification";
 
 export const getFetcher = (...args: any) =>
-  // @ts-ignore
+  // @ts-expect-error any
   fetch(...args)
     .then((res) => res.json())
     .then((data) => data.data)

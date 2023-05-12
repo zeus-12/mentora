@@ -15,14 +15,27 @@ import useSWR from "swr";
 import { getFetcher } from "@/lib/SWR";
 import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
 
+interface AnswersType {
+  user: string;
+  answer: string;
+  doubt_id: string;
+  date: Date;
+  parent_id?: string;
+  liked_users: string[];
+  _id: string;
+  like_count: number;
+  liked: boolean;
+  subAnswers: AnswersType[];
+}
+
 const DoubtDetailsPage = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const user = session?.user?.email;
 
-  const { doubtId } = router.query;
+  const doubtId = router.query.doubtId as string;
 
-  const { data: answers, mutate } = useSWR(
+  const { data: answers, mutate } = useSWR<AnswersType[]>(
     doubtId ? `/api/answer/${doubtId}` : null,
     getFetcher,
     {}
@@ -130,9 +143,8 @@ const DoubtDetailsPage = () => {
         </Button>
 
         <div className="space-y-4 mt-4">
-          {answers?.length > 0 &&
-            // @ts-ignore
-
+          {answers &&
+            answers?.length > 0 &&
             answers?.map((answer, index) => (
               <div key={index}>
                 <CommentCard
@@ -143,13 +155,11 @@ const DoubtDetailsPage = () => {
                   user={answer.user}
                   comment={answer.answer}
                   type="answer"
-                  // @ts-ignore
                   id={doubtId}
                   parentId={answer._id}
                   mutate={mutate}
                 />
                 {answer?.subAnswers?.length > 0 &&
-                  // @ts-ignore
                   answer.subAnswers.map((subAnswer, index) => (
                     <SubCommentCard
                       like_count={subAnswer.like_count}

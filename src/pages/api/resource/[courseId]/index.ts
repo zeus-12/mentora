@@ -1,13 +1,13 @@
-import Resource from "../../../../models/resource";
-import dbConnect from "../../../../lib/dbConnect";
-import getServerSession from "../../../../utils/getServerSession";
+import Resource from "@/models/resource";
+import dbConnect from "@/lib/dbConnect";
+import getServerSession from "@/utils/getServerSession";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { courseId } = req.query;
+  const { courseId } = req.query as { courseId: string };
 
   if (req.method === "POST") {
     const { file_name, file_url, file_type } = req.body;

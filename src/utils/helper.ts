@@ -53,7 +53,7 @@ export const paginatedFilterCoursesOnSearch = (
   curPage: number,
   branchFilter: string
 ) => {
-  if (searchQuery?.trim()?.length === 0) return [];
+  if (searchQuery?.trim()?.length === 0) return { courses: [], totalPages: 0 };
 
   const results = Object.keys(CourseMapping).filter((courseId) => {
     return [
