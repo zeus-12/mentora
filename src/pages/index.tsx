@@ -18,17 +18,17 @@ const features = [
 
 export default function Home() {
   return (
-    <main className="md:p-4 p-2 flex-1 lg:p-6 xl:p-8">
+    <main className="md:p-4 p-2 flex-1 lg:p-6 xl:p-8 items-center justify-center flex flex-col xl:mx-24">
       <Head>
         <title>Mentora</title>
         <meta name="description" content="All-In-One App for Acads!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <div className="self-start ">
         <p className="text-4xl font-bold md:text-5xl text-gray-100 tracking-tight lg:text-6xl block">
-          👋 Hey Junta,
+          Hey Junta 👋,
         </p>
-        <p className="xl:ml-16 md:text-3xl tracking-tighter md:max-w-[40rem] text-2xl font-semibold text-gray-400 mt-4 font-mono">
+        <p className="md:text-3xl tracking-tighter md:max-w-[40rem] text-2xl font-semibold text-gray-400 mt-4 font-mono">
           This is{" "}
           <span className="text-green-400 hover:underline underline-offset-4">
             Mentora
@@ -50,11 +50,11 @@ export default function Home() {
         <div className="flex flex-col gap-2 justify-center">
           {features.map((feature) => (
             <Link passHref href={`${feature.href}`} key={feature.title}>
-              <div className="hover:border-[1px] rounded-md hover:scale-[101%] transition transform duration-100 ease-out hover:border-green-500 p-3 hover:cursor-pointer">
-                <p className="sm:text-4xl text-3xl font-semibold text-green-400 font-mono">
+              <div className="rounded-md hover:scale-[101%] transition transform duration-100 ease-out hover:bg-green-800 p-3 hover:cursor-pointer group">
+                <p className="sm:text-4xl text-3xl font-semibold text-green-400 font-mono group-hover:text-green-200">
                   {feature.title}
                 </p>
-                <p className="font-medium text-gray-400 text-xl">
+                <p className="font-medium text-gray-400 text-xl group-hover:text-gray-200">
                   {feature.body}
                 </p>
               </div>
