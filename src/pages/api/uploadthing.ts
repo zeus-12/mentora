@@ -1,8 +1,8 @@
 import { createNextPageApiHandler } from "uploadthing/next-legacy";
-import { ourFileRouter } from "@/lib/uploadthing";
+import { uploadRouter } from "@/lib/uploadthing";
 
 const handler = createNextPageApiHandler({
-  router: ourFileRouter,
+  router: uploadRouter,
 });
 
 export default handler;

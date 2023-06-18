@@ -7,12 +7,16 @@ import SubCommentCard from "@/components/Common/SubCommentCard";
 import {
   errorNotification,
   notSignedInNotification,
+  successNotification,
 } from "@/utils/Notification";
 import { useSession } from "next-auth/react";
 import useSwr from "swr";
 import { disableAutoRevalidate, getFetcher } from "@/lib/SWR";
 import FilePreview from "@/components/Common/FilePreview";
 import * as CourseMapping from "@/lib/COURSE_MAPPING.json";
+import { UploadButton } from "@uploadthing/react";
+import type { uploadRouter } from "@/lib/uploadthing";
+import "@uploadthing/react/styles.css";
 
 // interface CourseResource {
 //   course_id: string;
@@ -52,12 +56,12 @@ const CourseDetails = () => {
   );
 
   const { data: courseData } = useSwr(
-    `/api/course/${courseId}`,
+    courseId ? `/api/course/${courseId}` : null,
     getFetcher,
     disableAutoRevalidate
   );
 
-  const { data: courseResources } = useSwr(
+  const { data: courseResources, mutate: mutateCourseResources } = useSwr(
     `/api/resource/${courseId}`,
     getFetcher
   );
@@ -112,24 +116,29 @@ const CourseDetails = () => {
             </p>
           </div>
 
+          <div
+            onClick={(e) => {
+              if (!session) {
+                e.preventDefault();
+                e.stopPropagation();
+                notSignedInNotification("Please sign in to add resources");
+                return;
+              }
+            }}
+          >
+            <UploadButton<uploadRouter>
+              endpoint="courseResourcesUploader"
+              onClientUploadComplete={() => {
+                successNotification("File Uploaded Successfully");
+                mutateCourseResources();
+              }}
+              onUploadError={(error: any) => {
+                errorNotification("Something went wrong!");
+              }}
+            />
+          </div>
+
           <div className="flex flex-col items-center gap-2">
-            <a
-              href={session ? `/course/${courseId}/new-submission` : undefined}
-            >
-              <Button
-                onClick={
-                  !session
-                    ? () =>
-                        notSignedInNotification(
-                          "Please Sign in to Add a Submission"
-                        )
-                    : () => {}
-                }
-                className="btn-outline"
-              >
-                Add Resources
-              </Button>
-            </a>
             <div className="flex gap-2">
               <Badge color="green" size="lg">
                 {courseData?.course_type || "Unknown"}
