@@ -1,6 +1,6 @@
 {
-  "name": "mentora-ts-mig",
-  "version": "0.1.0",
+  "name": "mentora",
+  "version": "2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
