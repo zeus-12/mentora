@@ -62,7 +62,7 @@ const CourseDetails = () => {
   );
 
   const { data: courseResources, mutate: mutateCourseResources } = useSwr(
-    `/api/resource/${courseId}`,
+    courseId ? `/api/resource/${courseId}` : null,
     getFetcher
   );
 
@@ -127,6 +127,9 @@ const CourseDetails = () => {
             }}
           >
             <UploadButton<uploadRouter>
+              input={{
+                courseId,
+              }}
               endpoint="courseResourcesUploader"
               onClientUploadComplete={() => {
                 successNotification("File Uploaded Successfully");

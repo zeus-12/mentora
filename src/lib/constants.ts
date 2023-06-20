@@ -49,3 +49,8 @@ export const availableBranches = [
   // "NC",
   // "NS",
 ];
+
+export const SERVER_URL =
+  (process.env.NODE_ENV as string) === "local"
+    ? "http://localhost:3000"
+    : "https://mentora.cf";
