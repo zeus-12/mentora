@@ -116,6 +116,26 @@ const CourseDetails = () => {
             </p>
           </div>
 
+          <div className="flex flex-col items-center gap-2">
+            <div className="flex-col sm:flex-row flex gap-2">
+              <Badge color="green" size="lg">
+                {courseData?.course_type || "Unknown"}
+              </Badge>
+              <Badge color="green" size="lg">
+                Credits: {courseData?.credits}{" "}
+              </Badge>
+            </div>
+          </div>
+        </div>
+        {courseData?.description && (
+          <Blockquote color="green" className="text-gray-400 sm:w-[70vw]">
+            {courseData?.description}
+          </Blockquote>
+        )}
+
+        {/* course resources */}
+
+        <div className="flex flex-wrap gap-2 my-2">
           <div
             onClick={(e) => {
               if (!session) {
@@ -141,25 +161,6 @@ const CourseDetails = () => {
             />
           </div>
 
-          <div className="flex flex-col items-center gap-2">
-            <div className="flex gap-2">
-              <Badge color="green" size="lg">
-                {courseData?.course_type || "Unknown"}
-              </Badge>
-              <Badge color="green" size="lg">
-                Credits: {courseData?.credits}{" "}
-              </Badge>
-            </div>
-          </div>
-        </div>
-        {courseData?.description && (
-          <Blockquote color="green" className="text-gray-400 sm:w-[70vw]">
-            {courseData?.description}
-          </Blockquote>
-        )}
-
-        {/* course resources */}
-        <div className="flex flex-wrap gap-2">
           {courseResources &&
             courseResources?.resources?.map(
               (resource: ResourcesProps, index: number) => (
