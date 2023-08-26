@@ -1,5 +1,6 @@
 import { SERVER_URL } from "@/lib/constants";
 import getServerSession from "@/utils/getServerSession";
+import { postRequestConfig } from "@/utils/helper";
 import { createUploadthing, type FileRouter } from "uploadthing/next-legacy";
 import z from "zod";
 
@@ -33,10 +34,7 @@ export const uploadRouter = {
     })
     .onUploadComplete(async ({ metadata, file }) => {
       await fetch(`${SERVER_URL}/api/resource/${metadata.courseId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        ...postRequestConfig,
         body: JSON.stringify({
           file_name: file.name,
           file_url: file.url,
